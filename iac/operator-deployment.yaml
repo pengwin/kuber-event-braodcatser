@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    operator-deployment: kubernetes-operator
+  name: operator
+  namespace: event-broadcaster-system
+spec:
+  replicas: 3 # HA
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      operator-deployment: kubernetes-operator
+  template:
+    metadata:
+      labels:
+        operator-deployment: kubernetes-operator
+    spec:
+      containers:
+        - env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: DOTNET_RabbitMq__Host
+              value: "host.minikube.internal"
+            - name: DOTNET_RabbitMq__Port
+              value: "5672"
+            - name: DOTNET_RabbitMq__User
+              value: "rabbit_user"
+            - name: DOTNET_RabbitMq__Pass
+              value: "password"
+          image: event-operator:0.0.8
+          imagePullPolicy: Never
+          name: operator
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+      terminationGracePeriodSeconds: 10

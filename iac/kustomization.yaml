@@ -1,0 +1,11 @@
+resources:
+  - operator-role.yaml
+  - operator-role-binding.yaml
+  - operator-deployment.yaml
+  - operator-namespace.yaml
+  - listener-deployment.yaml
+  - listener-namespace.yaml
+  - listener-service.yaml
+  - listener-ingress.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization

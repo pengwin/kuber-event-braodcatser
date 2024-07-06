@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: listener
+  name: listener
+  namespace: event-listeners
+spec:
+  replicas: 3 # HA
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: listener
+  template:
+    metadata:
+      labels:
+        app: listener
+      annotations:
+        event-broadcast-port: "5080"
+        event-broadcast-path: "/event"
+    spec:
+      containers:
+        - env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: ASPNETCORE_URLS
+              value: http://+:5080
+          image: event-listener:0.0.9
+          imagePullPolicy: Never
+          name: listener
+          ports:
+            - containerPort: 5080
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+      terminationGracePeriodSeconds: 10

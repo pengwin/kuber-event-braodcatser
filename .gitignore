@@ -1,0 +1,64 @@
+\# Built application files
+\*.exe
+\*.dll
+\*.so
+\*.dylib
+\*.winmd
+
+\# Packaged files
+\*.nupkg
+\*.snupkg
+
+\# Build outputs
+\bin/
+\obj/
+
+\# Tools
+\.vs/
+\.vscode/
+\*.user
+\*.userosscache
+\._*
+Thumbs.db
+desktop.ini
+
+\# Test Results
+\TestResults
+
+\# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+\# ASP.NET Scaffolding
+\ScaffoldingReadMe.txt
+```\*.suo
+\*.userprefs
+\*.dbmdl
+\*.db\_schema
+\*.jfm
+\jetbrains/
+
+\# Project files
+\*.csproj.user
+\*.pubxml
+\publish/
+
+\# Others
+\packages/
+\*.cache
+\*.log
+\*.vsix
+\*.pidb
+\*.swp
+\*.sln.docstates
+
+\# Rider
+\.idea/
+
+\# User-specific files
+\*.rsuser
+\*.suo
+
+\# OS generated files
+.DS\_Store*

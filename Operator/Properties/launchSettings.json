@@ -1,0 +1,17 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "local": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_RabbitMq__Host": "localhost",
+        "DOTNET_RabbitMq__Port": "5672",
+        "DOTNET_RabbitMq__User": "rabbit_user",
+        "DOTNET_RabbitMq__Pass": "password"
+      }
+    }
+  }
+}
