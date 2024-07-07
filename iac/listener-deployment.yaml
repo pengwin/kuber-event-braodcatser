@@ -16,6 +16,7 @@ spec:
       labels:
         app: listener
       annotations:
+        event-broadcast-enabled: "true"
         event-broadcast-port: "5080"
         event-broadcast-path: "/event"
     spec:

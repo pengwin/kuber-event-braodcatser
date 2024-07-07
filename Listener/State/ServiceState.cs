@@ -1,9 +1,12 @@
+using System.Collections.Concurrent;
+
 namespace Listener.State;
 
 public class ServiceState
 {
     private readonly ReaderWriterLockSlim _lock = new();
     private string? _lastReceivedMessage;
+    private readonly ConcurrentBag<string> _messages = new ();
     
     public string? LastReceivedMessage
     {
@@ -27,10 +30,16 @@ public class ServiceState
         {
             _lock.EnterWriteLock();
             _lastReceivedMessage = message;
+            _messages.Add(message);
         }
         finally
         {
             _lock.ExitWriteLock();
         }
+    }
+    
+    public IEnumerable<string> GetMessages()
+    {
+        return _messages;
     }
 }

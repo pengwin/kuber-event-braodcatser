@@ -19,6 +19,16 @@ public class PodsCollection
             return false;
         }
         
+        if (!pod.Metadata.Annotations.TryGetValue("event-broadcast-enabled", out var enabledStr))
+        {
+            return false;
+        }
+        
+        if (!bool.TryParse(enabledStr, out var enabled) || !enabled)
+        {
+            return false;
+        }
+        
         if (!pod.Metadata.Annotations.TryGetValue("event-broadcast-port", out var port))
         {
             return false;

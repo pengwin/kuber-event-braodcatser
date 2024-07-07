@@ -17,6 +17,7 @@ app.MapPost("/event", (ILogger<Program> logger, ServiceState state, [FromBody]Br
     logger.LogInformation("Event: {Event.Message}", @event.Message);
     state.SetLastReceivedMessage(@event.Message);
 });
+app.MapGet("/events", (ServiceState state) => state.GetMessages().ToArray());
 
 app.Run();
 
